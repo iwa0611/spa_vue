@@ -1,23 +1,24 @@
 <template>
 <div>
-  <button @click="onclick">push</button>
-  <div v-for=" item in info" :key="item.id">
-    <p>koko : {{ item.comment }}</p>
-  </div>
+  <input type="text" v-model="comment" />
+  <button @click="onclick">送信</button>
 </div>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   data() {
     return {
-      info: null
+      comment: null
     }
   },
   methods: {
     onclick: function() {
-      this.$http('http://localhost:3000/api/v1/contents')
-      .then(response =>  (this.info = response.data.contents))
+      axios.post('http://localhost:3000/api/v1/contents', { comment: this.comment })
+      .then(response =>  console.log(response.data))
+      this.comment = []
     }
   }
 }

@@ -5,8 +5,8 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/search">Search</router-link>
     </div>
-    <router-view/>
     <hr />
+    <router-view/>
   </div>
 </template>
 
@@ -43,5 +43,8 @@ html {
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+li {
+  list-style: none;
 }
 </style>
