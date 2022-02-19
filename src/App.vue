@@ -10,16 +10,6 @@
   </div>
 </template>
 
-<script>
-import { mapState } from 'vuex'
-import { mapMutations} from 'vuex'
-
-export default {
-  name: "app",
-  computed: mapState([ 'count'] ),
-  methods: mapMutations([ 'plus', 'minus' ]),
-}
-</script>
 <style>
 html {
   background-color: rgb(32, 32, 32);

@@ -1,45 +1,36 @@
 <template>
   <div class="home">
-    <div id="comment-list">
-      <ul class="box">
-        <li class="comment-box" v-for=" item in contents" :key="item.id">
-          <p>コメント:{{ item.comment }}</p>
-          <button @click="deleteComment(item.id)">削除</button>
-        </li>
-      </ul>
+    <div v-for="content in contents" :key="content.id">
+      <AnimeInfo v-for="(l, i) in { content }" @clickedRemoveList="removeFromList" :item="l" :index='i + 1' :key="l.id"></AnimeInfo>
     </div>
   </div>
 </template>
 
 <script>
+import AnimeInfo from './AnimeInfo.vue'
 import axios from 'axios'
 
 export default {
   data() {
     return {
-      contents: null
+      contents: null,
+      list: ''
     }
   },
+  // リストの読み込み
   created: function() {
-      this.$http('http://localhost:3000/api/v1/contents')
-      .then(response =>  (this.contents = response.data.contents))
+      axios.defaults.baseURL = process.env.VUE_APP_API_URL
+      this.$http('/contents')
+      .then(response =>  (this.contents = response.data))
   },
+  components: {
+    AnimeInfo
+  },
+  // 子コンポーネントから削除のイベントを受け取りリロード
   methods: {
-    deleteComment(id) {
-      axios.delete('http://localhost:3000/api/v1/contents/' + id )
+    removeFromList: function() {
       this.$router.go({path: this.$router.currentRoute.path, force: true})
     }
   }
 }
 </script>
-
-<style>
-#comment-list ul li {
-  width: 45%;
-  float: left;
-  display: block;
-}
-.comment-box {
-  border: 1px solid rgb(153, 105, 105);
-}
-</style>
