@@ -56,7 +56,6 @@ export default {
 .add-remove  > button{
   position: absolute;
   right: 0;
-  top: 58px;
   color: wheat;
   background-color: rgb(65, 65, 219);
   border: 1px solid rgb(192, 198, 252);
