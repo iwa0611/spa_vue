@@ -12,7 +12,15 @@
 
 <style>
 html {
+  width: 800px;
+  margin: 0 auto;
+}
+body {
+  margin: -5px 10px;
+  padding: 0 10px;
   background-color: rgb(32, 32, 32);
+  border: solid #494949;
+  border-width: 0 0.5px;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

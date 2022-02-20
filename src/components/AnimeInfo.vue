@@ -55,7 +55,8 @@ export default {
 <style>
 .add-remove  > button{
   position: absolute;
-  right: 30%;
+  right: 0;
+  top: 58px;
   color: wheat;
   background-color: rgb(65, 65, 219);
   border: 1px solid rgb(192, 198, 252);
@@ -78,22 +79,22 @@ export default {
   margin: 15px auto;
 }
 .list{
+  position: relative;
   margin-bottom: -6px;
 }
-.test{
+.list-box > img {
   object-fit: cover;
 }
 .list-img > img{
-  position: relative;
   width: 100%;
-  height: 300px;
+  height: 200px;
   border-radius: 0 0 12px 12px;
 }
 .list-img > img:hover {
   opacity: 0.4;
   transition: 0.7s;
 }
-.list > p{
+.list > p {
   text-align: left;
   margin: 10px;
   overflow-wrap: break-word;
