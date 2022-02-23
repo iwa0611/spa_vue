@@ -1,5 +1,7 @@
 <template>
   <div class="list-container">
+    <!-- トースト用コンポーネント -->
+    <Message ref="child"></Message>
     <div class="list">
       <p>{{ item.title }}</p>
       <!-- search画面では追加を表示 -->
@@ -32,22 +34,28 @@
 
 <script>
 import axios from 'axios'
+import Message from './Message.vue'
 
 export default {
   name: 'anime-info',
   props: {
     item: { type: Object }
   },
+  components: {
+    Message
+  },
   methods: {
-    addList: function() {
+    addList: async function() {
       let infoJSON = JSON.stringify(this.item); // JSONを変換
-      axios.post('/contents', { infoJSON, title_id: this.item.id })
-      .then(response =>  console.log(response.data))
+      let res = await axios.post('/contents', { infoJSON, title_id: this.item.id })
+      console.log(res.data)
+      this.$refs.child.removeMessage(res.data.message)  // 子コンポーネントにトースト用メッセージを渡す
     },
     removeList: async function() {
-       await axios.delete('contents/' + this.item.id)
-      .then(response =>  console.log(response.data))
+      let res = await axios.delete('contents/' + this.item.id)
+      console.log(res.data)
       this.$emit('clickedRemoveList') // 親コンポーネントにイベントを通知
+      this.$refs.child.removeMessage(res.data.message)  // 子コンポーネントにトースト用メッセージを渡す
     }
   }
 }

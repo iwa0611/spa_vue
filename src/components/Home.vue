@@ -25,7 +25,7 @@ export default {
   components: {
     AnimeInfo
   },
-  // 子コンポーネントから削除のイベントを受け取りリロード
+  // 子コンポーネントから削除のイベントを受け取りリストを更新
   methods: {
     removeFromList: function() {
       axios.defaults.baseURL = process.env.VUE_APP_API_URL
