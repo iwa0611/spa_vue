@@ -44,9 +44,10 @@ export default {
       axios.post('/contents', { infoJSON, title_id: this.item.id })
       .then(response =>  console.log(response.data))
     },
-    removeList: function() {
-      axios.delete('contents/' + this.item.id)
-      this.$emit('clickedRemoveList'); // 親コンポーネントにイベントを通知
+    removeList: async function() {
+       await axios.delete('contents/' + this.item.id)
+      .then(response =>  console.log(response.data))
+      this.$emit('clickedRemoveList') // 親コンポーネントにイベントを通知
     }
   }
 }
@@ -75,7 +76,7 @@ export default {
   max-width: 40%;
   border-radius: 15px;
   padding: 0;
-  margin: 15px auto;
+  margin: 25px auto;
 }
 .list{
   position: relative;

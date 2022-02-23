@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div v-for="content in contents" :key="content.id">
-      <AnimeInfo v-for="(l, i) in { content }" @clickedRemoveList="removeFromList" :item="l" :index='i + 1' :key="l.id"></AnimeInfo>
+      <AnimeInfo v-for="l in { content } " @clickedRemoveList="removeFromList" :item="l" :key="l.id"></AnimeInfo>
     </div>
   </div>
 </template>
@@ -13,8 +13,7 @@ import axios from 'axios'
 export default {
   data() {
     return {
-      contents: null,
-      list: ''
+      contents: null
     }
   },
   // リストの読み込み
@@ -29,7 +28,9 @@ export default {
   // 子コンポーネントから削除のイベントを受け取りリロード
   methods: {
     removeFromList: function() {
-      this.$router.go({path: this.$router.currentRoute.path, force: true})
+      axios.defaults.baseURL = process.env.VUE_APP_API_URL
+      this.$http('/contents')
+      .then(response =>  (this.contents = response.data))
     }
   }
 }
