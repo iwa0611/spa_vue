@@ -34,7 +34,7 @@
 
 <script>
 import axios from 'axios'
-import Message from './Message.vue'
+import Message from './ResMessage.vue'
 
 export default {
   name: 'anime-info',
