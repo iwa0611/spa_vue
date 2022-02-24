@@ -57,7 +57,8 @@ li {
   opacity: 0;
 }
 .toasted-style {
-  background-color: #42b983bb !important;
+  background-color: #42b983c9 !important;
   border: 2px solid rgba(245, 222, 179, 0.637);
+  border-radius: 5px !important;
 }
 </style>
