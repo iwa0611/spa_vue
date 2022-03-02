@@ -14,6 +14,11 @@ const routes = [
     path: '/search',
     name: 'Search',
     component: () => import('../components/AnimeSearch.vue')
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import('../components/LoginForm.vue')
   }
 ]
 

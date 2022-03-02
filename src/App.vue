@@ -5,7 +5,8 @@
         <hr />
         <div id="nav">
           <router-link to="/">Home</router-link> |
-          <router-link to="/search">Search</router-link>
+          <router-link to="/search">Search</router-link> |
+          <router-link to="/login">Login</router-link>
         </div>
         <hr />
         <router-view/>
@@ -51,7 +52,7 @@ li {
   list-style: none;
 }
 .v-enter-active {
-  transition: 5s ease;
+  transition: 3s ease;
 }
 .v-enter {
   opacity: 0;
