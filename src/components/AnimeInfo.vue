@@ -49,13 +49,13 @@ export default {
       let infoJSON = JSON.stringify(this.item); // JSONを変換
       let res = await axios.post('/contents', { infoJSON, title_id: this.item.id })
       console.log(res.data)
-      this.$refs.child.removeMessage(res.data.message)  // 子コンポーネントにトースト用メッセージを渡す
+      this.$refs.child.toastMessage(res.data.message)  // 子コンポーネントにトースト用メッセージを渡す
     },
     removeList: async function() {
       let res = await axios.delete('contents/' + this.item.id)
       console.log(res.data)
       this.$emit('clickedRemoveList') // 親コンポーネントにイベントを通知
-      this.$refs.child.removeMessage(res.data.message)  // 子コンポーネントにトースト用メッセージを渡す
+      this.$refs.child.toastMessage(res.data.message)  // 子コンポーネントにトースト用メッセージを渡す
     }
   }
 }
