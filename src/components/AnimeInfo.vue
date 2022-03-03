@@ -4,13 +4,16 @@
     <Message ref="child"></Message>
     <div class="list">
       <p>{{ item.title }}</p>
-      <!-- search画面では追加を表示 -->
-      <div class="add-remove" v-if="this.$route.path === '/search'">
-        <button class="add-list" @click="addList">+追加+</button>
-      </div>
-      <!-- home画面では削除を表示 -->
-      <div class="add-remove" v-if="this.$route.path === '/'">
-        <button class="add-list" @click="removeList(item.id)">-削除-</button>
+      <!-- ログイン時追加or削除ボタン表示 -->
+      <div v-show="loggedIn">
+        <!-- search画面では追加を表示 -->
+        <div class="add-remove" v-if="this.$route.path === '/search'">
+          <button class="add-list" @click="addList">+追加+</button>
+        </div>
+        <!-- home画面では削除を表示 -->
+        <div class="add-remove" v-if="this.$route.path === '/'">
+          <button class="add-list" @click="removeList(item.id)">-削除-</button>
+        </div>
       </div>
       <!-- 公式URLと画像URLがない場合の処理 -->
       <div class="list-box" v-if="item.images.recommended_url === ''">
@@ -18,6 +21,7 @@
          <img src="@/assets/no_image_square.jpg" alt="#">
         </a>
       </div>
+      <!-- 公式URLがない場合の処理 -->
       <div class="list-box" v-else-if="item.official_site_url === ''">
         <a class="list-img" href="#">
           <img :src="item.images.recommended_url" href="">
@@ -43,6 +47,11 @@ export default {
   },
   components: {
     Message
+  },
+  computed: {
+    loggedIn: function() {
+      return this.$store.state.loggedIn
+    }
   },
   methods: {
     addList: async function() {
