@@ -1,12 +1,16 @@
 <template>
   <div id="app">
+    <!-- トースト用コンポーネント -->
+    <Message ref="child"></Message>
     <transition appear>
       <div>
         <hr />
         <div id="nav">
-          <router-link to="/">Home</router-link> |
-          <router-link to="/search">Search</router-link> |
-          <router-link to="/login">Login</router-link>
+          <router-link to="/">Home</router-link>
+          <div class="user-menu" v-if="$store.state.loggedIn">
+            | <router-link to="/search">Search</router-link>
+            | <router-link to="/login">LogOut</router-link>
+          </div>
         </div>
         <hr />
         <router-view/>
@@ -14,6 +18,33 @@
     </transition>  
   </div>
 </template>
+
+<script>
+import Message from './components/ResMessage.vue'
+
+export default {
+  components: {
+    Message
+  },
+  // トースト用に値を監視
+  computed: {
+    userData: function() {
+      return this.$store.state.userData.status
+    },
+    loggedIn: function() {
+      return this.$store.state.loggedIn
+    }
+  },
+  // トースト表示
+  watch: {
+    userData(e) {
+      e == 200 ?
+      this.$refs.child.toastMessage('ログインしました') :
+      this.$refs.child.toastMessage('ログアウトしました')
+    }
+  },
+}
+</script>
 
 <style>
 html {
@@ -61,5 +92,8 @@ li {
   background-color: #42b983c9 !important;
   border: 2px solid rgba(245, 222, 179, 0.637);
   border-radius: 5px !important;
+}
+.user-menu {
+  display: inline;
 }
 </style>
