@@ -1,8 +1,6 @@
 <template>
   <div class="login">
-    <!-- トースト用コンポーネント -->
-    <Message ref="child"></Message>
-    <div v-if="Object.keys($store.state.userData).length === 0">
+    <div v-if="!$store.state.loggedIn">
       <div>
         <input placeholder="email" v-model="email" type="email">
       </div>
@@ -26,30 +24,11 @@
 </template>
 
 <script>
-import Message from './ResMessage.vue'
-
 export default {
   data() {
     return {
       email: '',
       passWord: ''
-    }
-  },
-  components: {
-    Message
-  },
-  // トースト用に値を監視
-  computed: {
-    userData: function() {
-      return this.$store.state.userData.status
-    }
-  },
-  // トースト表示
-  watch: {
-    userData(e) {
-      e == 200 ?
-      this.$refs.child.toastMessage('ログインしました') :
-      this.$refs.child.toastMessage('ログアウトしました')
     }
   },
   methods: {

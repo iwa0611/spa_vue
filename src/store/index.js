@@ -17,7 +17,7 @@ export default new Vuex.Store({
     login: async function( state, {email, passWord}) {
       axios.defaults.baseURL = process.env.VUE_APP_API_URL
       await axios.post('/auth/sign_in', { email: email, password: passWord })
-      // ストレージにresを保存
+      // ストレージにstateを保存
       .then(res => {(state.userData = res)
             state.loggedIn = true
             sessionStorage.setItem('userData', JSON.stringify(state))
