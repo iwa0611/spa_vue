@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import store from '../store/index.js'
 import VueRouter from 'vue-router'
 import Home from '../components/MyHome.vue'
 
@@ -13,7 +14,14 @@ const routes = [
   {
     path: '/search',
     name: 'Search',
-    component: () => import('../components/AnimeSearch.vue')
+    component: () => import('../components/AnimeSearch.vue'),
+    beforeEnter: (to, from, next) => {
+      if (store.state.loggedIn){
+        next();
+      }else{
+        next('/');
+      }
+    }
   },
   {
     path: '/login',
