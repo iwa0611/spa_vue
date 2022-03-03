@@ -1,5 +1,6 @@
 import Vue  from 'vue'
 import Vuex from 'vuex'
+import router from '../router'
 import axios from 'axios'
 import createPersistedState from "vuex-persistedstate"
 
@@ -8,7 +9,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     userData: '',
-    err: ''
+    err: '',
+    loggedIn: false
   },
   mutations: {
     // login時の処理
@@ -17,7 +19,8 @@ export default new Vuex.Store({
       await axios.post('/auth/sign_in', { email: email, password: passWord })
       // ストレージにresを保存
       .then(res => {(state.userData = res)
-            sessionStorage.setItem('userData', JSON.stringify({ userData: state.userData }))
+            state.loggedIn = true
+            sessionStorage.setItem('userData', JSON.stringify(state))
             })
       // エラーメッセージ出力
       .catch(e => state.err = e.response.data.errors)
@@ -35,8 +38,8 @@ export default new Vuex.Store({
             // ストレージ情報削除
             sessionStorage.removeItem('userData')
             // ストアの値リセット
-            state.userData = '', state.err = ''
-            })
+            state.userData = '', state.err = '', state.loggedIn = false
+            router.push('/')})
       .catch(e => state.err = e.response.data.errors)
     }
   },
