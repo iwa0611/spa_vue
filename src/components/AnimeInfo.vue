@@ -2,8 +2,11 @@
   <div class="list-container">
     <!-- トースト用コンポーネント -->
     <Message ref="child"></Message>
+    <AnimeReview @close="closeModal" :item="item" v-if="modal"></AnimeReview>
     <div class="list">
-      <p>{{ item.title }}</p>
+      <p class="modal-title" @click="openModal">
+        {{ item.title }}
+      </p>
       <!-- ログイン時追加or削除ボタン表示 -->
       <div v-show="loggedIn">
         <!-- search画面では追加を表示 -->
@@ -39,14 +42,21 @@
 <script>
 import axios from 'axios'
 import Message from './ResMessage.vue'
+import AnimeReview from './AnimeReview.vue'
 
 export default {
+  data() {
+    return {
+      modal: false
+    }
+  },
   name: 'anime-info',
   props: {
     item: { type: Object }
   },
   components: {
-    Message
+    Message,
+    AnimeReview
   },
   computed: {
     loggedIn: function() {
@@ -65,13 +75,19 @@ export default {
       console.log(res.data)
       this.$emit('clickedRemoveList') // 親コンポーネントにイベントを通知
       this.$refs.child.toastMessage(res.data.message)  // 子コンポーネントにトースト用メッセージを渡す
+    },
+    openModal: function() {
+      this.modal = true
+    },
+    closeModal: function() {
+      this.modal =false
     }
   }
 }
 </script>
 
 <style>
-.add-remove  > button{
+.add-remove  > button {
   position: absolute;
   right: 0;
   color: wheat;
@@ -102,7 +118,7 @@ export default {
 .list-box > img {
   object-fit: cover;
 }
-.list-img > img{
+.list-img > img {
   width: 100%;
   height: 200px;
   border-radius: 0 0 12px 12px;
@@ -115,5 +131,12 @@ export default {
   text-align: left;
   margin: 10px;
   overflow-wrap: break-word;
+}
+.modal-title {
+  transition: all 0.3s;
+}
+.modal-title:hover {
+  cursor: pointer;
+  color: #42b983;
 }
 </style>

@@ -20,7 +20,7 @@ export default {
   created: function() {
       axios.defaults.baseURL = process.env.VUE_APP_API_URL
       this.$http('/contents')
-      .then(response =>  (this.contents = response.data))
+      .then(response => (this.contents = response.data))
   },
   components: {
     AnimeInfo
