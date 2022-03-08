@@ -2,6 +2,7 @@ import Vue  from 'vue'
 import Vuex from 'vuex'
 import router from '../router'
 import axios from 'axios'
+import review from './review.js'
 import createPersistedState from "vuex-persistedstate"
 
 Vue.use(Vuex)
@@ -46,6 +47,7 @@ export default new Vuex.Store({
   actions: {
   },
   modules: {
+    review: review
   },
   plugins: [createPersistedState(
     { key: 'userData',
