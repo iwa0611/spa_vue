@@ -30,7 +30,7 @@
               <table>
                 <tr>
                   <td>可愛い<StarRating :star-size="15" v-model="kawaii"></StarRating></td>
-                <td>面白い<StarRating :star-size="15" v-model="omosiroi"></StarRating></td>
+                  <td>面白い<StarRating :star-size="15" v-model="omosiroi"></StarRating></td>
                   <td>作画<StarRating :star-size="15" v-model="sakuga"></StarRating></td>
                 </tr>
                 <tr>
@@ -174,7 +174,6 @@ p {
 }
 table {
   margin: 15px auto 0;
-  
 }
 table td{
   padding: 0 15px;

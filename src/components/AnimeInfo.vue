@@ -64,23 +64,23 @@ export default {
     }
   },
   methods: {
-    addList: async function() {
-      let infoJSON = JSON.stringify(this.item); // JSONを変換
+    async addList() {
+      let infoJSON = JSON.stringify(this.item) // JSONを変換
       let res = await axios.post('/contents', { infoJSON, title_id: this.item.id })
       console.log(res.data)
       this.$refs.child.toastMessage(res.data.message)  // 子コンポーネントにトースト用メッセージを渡す
     },
-    removeList: async function() {
+    async removeList() {
       let res = await axios.delete('contents/' + this.item.id)
       console.log(res.data)
       this.$emit('clickedRemoveList') // 親コンポーネントにイベントを通知
       this.$refs.child.toastMessage(res.data.message)  // 子コンポーネントにトースト用メッセージを渡す
     },
-    openModal() {
-      this.$store.dispatch('show', this.item.id)
+    openModal() { // reviewの取得とモーダルの表示
+      this.$store.dispatch('show', this.item.id) // review.jsのアクションを呼び出し
       this.modal = true
     },
-    closeModal: function() {
+    closeModal() {
       this.modal =false
     }
   }
