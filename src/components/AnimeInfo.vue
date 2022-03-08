@@ -76,7 +76,8 @@ export default {
       this.$emit('clickedRemoveList') // 親コンポーネントにイベントを通知
       this.$refs.child.toastMessage(res.data.message)  // 子コンポーネントにトースト用メッセージを渡す
     },
-    openModal: function() {
+    openModal() {
+      this.$store.dispatch('show', this.item.id)
       this.modal = true
     },
     closeModal: function() {
