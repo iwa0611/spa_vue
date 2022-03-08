@@ -180,9 +180,6 @@ table td{
   max-width: 90px;
 }
 textarea {
-  position: absolute;
-  bottom: 45px;
-  right: 25px;
   background-color: rgb(37, 37, 37);
   border: 1px solid rgba(114, 114, 114, 0.342);
   border-radius: 4px;
@@ -190,6 +187,7 @@ textarea {
   outline: none;
   color: #e7e7e7;
   padding: 5px;
+  margin-top: 15px;
 }
 footer {
   position: absolute;
