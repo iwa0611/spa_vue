@@ -1,25 +1,32 @@
-module.exports = {
-  'E2E  Login Test': (browser) => {
-    browser
-      // ページを開き処理を待つ
-      .url('http://localhost:8081/login')
-      .waitForElementVisible('body', 1000)
-      // ログインの検証
-      .setValue('input[type=email]', 'test-user+1@example.com')
-      .setValue('input[type=password]', 'password')
-      .pause(3000)
-      .assert.visible('input[type=email]')
-      .assert.visible('input[type=password]')
-      .click('button')
-      .pause(3000)
-      // ログイン後メールアドレスが表示される
-      browser.expect.element('.login').text
-        .to.contain('test-user+1@example.com')
-      browser
-        .click('button')
-        .pause(3000)
-        // ログアウト後homeに遷移する
-        .assert.urlEquals('http://localhost:8081/')
-    browser.end();
-  },
-};
+describe('E2E  Login Test', () => {
+  it('ログインができる・未ログインではメニューがHOMEのみになる', () => {
+    // ログインに失敗する
+    cy.visit('http://localhost:8081/login')
+    cy.contains('button', 'LogIn').click()
+    cy.get('body').contains('Invalid login credentials. Please try again.')
+    // ログインできる
+    cy.get('input[type=email]').type('test-user+1@example.com')
+    cy.get('input[type=password]').type('password')
+    cy.contains('button', 'LogIn').click()
+    cy.wait(1000)
+    // ログイン後メールアドレスが表示される
+    cy.contains('test-user+1@example.com')
+    cy.contains('button', 'LogOut').click()
+    cy.wait(1000)
+    // ログアウト後homeに遷移する
+    cy.location().should((loc) => {
+      expect(loc.href).to.eq('http://localhost:8081/')
+    })
+    cy.get('#nav').should('have.text', 'Home')
+    // 未ログインではsearchが開けない
+    cy.visit('http://localhost:8081/search')
+    cy.location().should((loc) => {
+      expect(loc.href).to.eq('http://localhost:8081/')
+    })
+    // 削除が表示されない
+    cy.get('.add-remove').should('not.exist')
+    // 編集が表示されない
+    cy.get('.home').find('.modal-title').click()
+    cy.get('footer').contains('編集').should('not.be.visible')
+  })
+})
