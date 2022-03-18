@@ -17,7 +17,9 @@
     <transition>
       <spinner v-show="isLoading" size="huge" class="spin"></spinner>
     </transition>
-    <AnimeInfo v-for="l in list" :item="l" :key="l.id"></AnimeInfo>
+    <div class="flex-container">
+      <AnimeInfo v-for="l in list" :item="l" :key="l.id"></AnimeInfo>
+    </div>
   </div>
 </template>
 
@@ -59,7 +61,10 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.flex-list {
+  width: 50%;
+}
 .spin {
   display: block;
   position: absolute;

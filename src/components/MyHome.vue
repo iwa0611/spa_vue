@@ -1,6 +1,6 @@
 <template>
-  <div class="home">
-    <div v-for="content in contents" :key="content.id">
+  <div class="flex-container">
+    <div class="contents-box" v-for="content in contents" :key="content.id">
       <AnimeInfo v-for="l in { content } " @clickedRemoveList="removeFromList" :item="l" :key="l.id"></AnimeInfo>
     </div>
   </div>
@@ -35,3 +35,13 @@ export default {
   }
 }
 </script>
+
+<style>
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+.contents-box {
+  width: 50%;
+}
+</style>

@@ -1,5 +1,6 @@
 <template>
-  <div class="list-container">
+<div class="flex-list">
+    <div class="list-container">
     <!-- トースト用コンポーネント -->
     <Message ref="child"></Message>
     <AnimeReview @close="closeModal" :item="item" v-if="modal"></AnimeReview>
@@ -37,6 +38,8 @@
       </div>
     </div>
   </div>
+
+</div>
 </template>
 
 <script>
@@ -107,7 +110,7 @@ export default {
   background-color: rgb(19, 19, 19);
   display: block;
   border: 2px solid #42b983;
-  max-width: 40%;
+  max-width: 75%;
   border-radius: 15px;
   padding: 0;
   margin: 25px auto;
@@ -121,7 +124,7 @@ export default {
 }
 .list-img > img {
   width: 100%;
-  height: 200px;
+  height: 170px;
   border-radius: 0 0 12px 12px;
 }
 .list-img > img:hover {
