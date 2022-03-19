@@ -16,9 +16,11 @@
     "vue": "^2.6.14",
     "vue-axios": "^3.4.1",
     "vue-router": "^3.5.3",
+    "vue-scrollto": "^2.20.0",
     "vue-simple-spinner": "^1.2.10",
     "vue-star-rating": "^1.7.0",
     "vue-toasted": "^1.1.28",
+    "vuejs-paginate": "^2.1.0",
     "vuex": "^3.6.2",
     "vuex-persistedstate": "^4.1.0"
   },

@@ -5,6 +5,8 @@ import store from './store'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import Toasted from 'vue-toasted'
+import VueScrollTo from 'vue-scrollto'
+import Paginate from 'vuejs-paginate'
 import StarRating from 'vue-star-rating'
 
 Vue.config.productionTip = false
@@ -14,8 +16,10 @@ Vue.use(Toasted,{
   duration: 2500,
   className: ['toasted-style'],
 });
+Vue.component('PagiNate', Paginate)
 Vue.use(VueAxios, axios)
 Vue.use(StarRating)
+Vue.use(VueScrollTo)
 
 // アプリの起動
 new Vue({
