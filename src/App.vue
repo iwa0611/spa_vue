@@ -96,4 +96,17 @@ li {
 .user-menu {
   display: inline;
 }
+/* scopedの関係で適用されないので此方に移動 */
+.pagination > .active {
+  border-bottom: 3px solid #42b983c9;
+}
+.pagination > li {
+  margin: 0 10px;
+}
+.pagination li > a {
+  padding: 0 5px;
+}
+.pagination li > a:hover {
+  background: #42b983;
+}
 </style>
