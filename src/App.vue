@@ -14,6 +14,9 @@
         </div>
         <hr />
         <router-view/>
+        <p class="footer-logo">Annict様のAPIを使用しています : 
+          <a href="https://annict.com/">Annict</a>
+        </p>
       </div>
     </transition>  
   </div>
@@ -48,6 +51,7 @@ export default {
 
 <style>
 html {
+  position: relative;
   width: 800px;
   margin: 0 auto;
   background-color: rgb(24, 24, 24);
@@ -95,6 +99,19 @@ li {
 }
 .user-menu {
   display: inline;
+}
+.footer-logo {
+  position: absolute;
+  right: 40%;
+  bottom: 15px;
+  font-size: 10px;
+}
+.footer-logo > a{
+  text-decoration: none;
+  color: white;
+}
+.footer-logo > a:hover {
+  background: #42b983;
 }
 /* scopedの関係で適用されないので此方に移動 */
 .pagination > .active {
