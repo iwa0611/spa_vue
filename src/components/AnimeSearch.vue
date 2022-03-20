@@ -15,7 +15,7 @@
     </select>
     <button @click="onclick">検索</button>
     <transition>
-      <spinner v-show="isLoading" size="huge" class="spin"></spinner>
+      <spinner v-if="isLoading" size="huge" class="spin"></spinner>
     </transition>
     <div v-if="this.total > 0">検索結果：{{ this.total }}件</div>
     <div class="flex-container">

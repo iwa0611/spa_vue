@@ -9,7 +9,7 @@
         {{ item.title }}
       </p>
       <!-- ログイン時追加or削除ボタン表示 -->
-      <div v-show="loggedIn">
+      <div v-if="loggedIn">
         <!-- search画面では追加を表示 -->
         <div class="add-remove" v-if="this.$route.path === '/search'">
           <button class="add-list" @click="addList">+追加+</button>

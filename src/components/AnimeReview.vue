@@ -43,7 +43,7 @@
             </div>
             <textarea v-model="comment" cols="60" rows="4" placeholder="コメント(120文字以内)" maxlength="120"></textarea>
             <footer>
-              <button v-show="loggedIn" @click="editReview">編集</button>
+              <button v-if="loggedIn" @click="editReview">編集</button>
               <button @click="$emit('close')">閉じる</button>
             </footer>
           </div>
