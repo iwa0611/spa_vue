@@ -8,7 +8,7 @@ beforeEach(() => {
     }).as('post_req');
 })
 
-describe("E2E TOTAL TEST", () => {
+describe("E2E Total Test", () => {
   it('ログイン・ログアウト・リスト追加・削除・レビュー編集ができる', () => {
     // ログイン
     cy.visit('http://localhost:8081/login')
