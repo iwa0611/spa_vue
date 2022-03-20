@@ -26,7 +26,7 @@ describe("E2E Total Test", () => {
       expect(xhr.response.body).to.eq(JSON.stringify(test))
     })
     // contentsが表示される
-    cy.get('.modal-title').should('be.visible')
+    cy.get('.list-container').should('be.visible')
     // リスト追加
     cy.contains('button', '+追加+').click()
     cy.get('body').contains('リスト追加に成功')

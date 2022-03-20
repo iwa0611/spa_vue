@@ -12,7 +12,7 @@
       </option>
     </select>
     <button @click="getIndex">表示</button>
-    <button @click="getIndexAll">全表示</button>
+    <button v-if="loggedIn" @click="getIndexAll">全表示</button>
     <div class="flex-container">
       <div class="contents-box" v-for="content in contents" :key="content.id">
         <AnimeInfo v-for="l in { content } " @clickedRemoveList="removeFromList" :item="l" :key="l.id"></AnimeInfo>
@@ -53,6 +53,11 @@ export default {
   },
   components: {
     AnimeInfo
+  },
+  computed: {
+    loggedIn: function() {
+      return this.$store.state.loggedIn
+    }
   },
   // 子コンポーネントから削除のイベントを受け取りリストを更新
   methods: {

@@ -5,7 +5,11 @@
     <Message ref="child"></Message>
     <AnimeReview @close="closeModal" :item="item" v-if="modal"></AnimeReview>
     <div class="list">
-      <p class="modal-title" @click="openModal">
+      <!-- home画面の時はモーダルが開ける -->
+      <p v-if="this.$route.path === '/'" class="modal-title" @click="openModal">
+        {{ item.title }}
+      </p>
+      <p v-else>
         {{ item.title }}
       </p>
       <!-- ログイン時追加or削除ボタン表示 -->
