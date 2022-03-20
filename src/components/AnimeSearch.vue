@@ -104,6 +104,11 @@ export default {
 .flex-list {
   width: 50%;
 }
+@media screen and (max-width:767px) {
+  .flex-list {
+    width: 100%;
+  }
+}
 .spin {
   display: block;
   position: absolute;

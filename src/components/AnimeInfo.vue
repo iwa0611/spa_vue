@@ -105,6 +105,11 @@ export default {
   margin: 0 3px 3px;
   z-index: 1;
 }
+@media screen and (max-width:767px) {
+  .add-remove  > button {
+    font-size: 22px;
+  }
+}
 .add-remove  > button:hover {
   opacity: 0.4;
   transition: 0.3s;
@@ -119,6 +124,17 @@ export default {
   padding: 0;
   margin: 25px auto;
 }
+@media screen and (max-width:767px) {
+.list-container {
+  background-color: rgb(19, 19, 19);
+  display: block;
+  border: 2px solid #42b983;
+  max-width: 50%;
+  border-radius: 15px;
+  padding: 0;
+  margin: 25px auto;
+}
+}
 .list{
   position: relative;
   margin-bottom: -6px;
@@ -130,6 +146,11 @@ export default {
   width: 100%;
   height: 170px;
   border-radius: 0 0 12px 12px;
+}
+@media screen and (max-width:767px) {
+  .list-img > img {
+    height: 210px;
+  }
 }
 .list-img > img:hover {
   opacity: 0.4;

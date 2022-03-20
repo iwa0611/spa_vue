@@ -25,7 +25,7 @@
               </a>
             </div>
             <p>{{ item.title }}</p>
-            <div>
+            <div class="modal-body">
               放送時期 : {{ item.season_name_text }}
               <table>
                 <tr>
@@ -159,6 +159,12 @@ export default {
   width: 500px;
   height: 600px;
 }
+@media screen and (max-width:767px) {
+  .modal-window {
+    width: 90%;
+    height: 90%;
+  }
+}
 .modal-window > img{
   object-fit: cover;
 }
@@ -166,11 +172,28 @@ export default {
   width: 100%;
   height: 262.5px;
 }
+@media screen and (max-width:767px) {
+  .modal-img > img{
+    width: 100%;
+    height: 360px;
+  }
+}
 p {
   margin-top: 5px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+@media screen and (max-width:767px) {
+  p {
+    font-size: 22px;
+    margin-top: 20px;
+    font-weight: bold;
+  }
+  .modal-body {
+    font-size: 22px;
+    font-weight: bold;
+  }
 }
 table {
   margin: 15px auto 0;
@@ -188,6 +211,14 @@ textarea {
   color: #e7e7e7;
   padding: 5px;
   margin-top: 15px;
+}
+@media screen and (max-width:767px) {
+  textarea {
+    font-size: 22px;
+    width: 90%;
+    padding: 5px;
+    margin-top: 30px;
+  }
 }
 footer {
   position: absolute;

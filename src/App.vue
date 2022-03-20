@@ -56,6 +56,11 @@ html {
   margin: 0 auto;
   background-color: rgb(24, 24, 24);
 }
+@media screen and (max-width:767px) {
+  html {
+    width: 700px;
+  }
+}
 body {
   min-height: 100vh;
   margin: 10px 0;

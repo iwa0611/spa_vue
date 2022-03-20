@@ -51,6 +51,14 @@ export default {
 .contents-box {
   width: 50%;
 }
+@media screen and (max-width:767px) {
+  .contents-box {
+    width: 100%;
+  }
+  button, select, input{
+    font-size: 22px;
+  }
+}
 .watch-list {
   font-size: 20px;
   font-weight: bold;
