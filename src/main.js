@@ -21,6 +21,9 @@ Vue.use(VueAxios, axios)
 Vue.use(StarRating)
 Vue.use(VueScrollTo)
 
+// ベースURL指定
+axios.defaults.baseURL = process.env.VUE_APP_API_URL
+
 // アプリの起動
 new Vue({
   router,
