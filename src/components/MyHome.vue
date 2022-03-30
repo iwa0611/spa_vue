@@ -3,7 +3,7 @@
     <div class="watch-list">今期視聴作品</div>
     <div class="home flex-container">
       <div class="contents-box" v-for="content in contents" :key="content.id">
-        <AnimeInfo v-for="l in { content } " @clickedRemoveList="removeFromList" :item="l" :key="l.id"></AnimeInfo>
+        <AnimeInfo v-for="l in { content } " @clickedRemoveList="reloadList" :item="l" :key="l.id"></AnimeInfo>
       </div>
     </div>
     <div class="watch-list">過去視聴作品</div>
@@ -24,9 +24,7 @@ export default {
   },
   // リストの読み込み
   created: function() {
-      axios.defaults.baseURL = process.env.VUE_APP_API_URL
-      this.$http('/contents')
-      .then(response => (this.contents = response.data))
+    this.reloadList()
   },
   components: {
     AnimeInfo,
@@ -34,9 +32,8 @@ export default {
   },
   // 子コンポーネントから削除のイベントを受け取りリストを更新
   methods: {
-    removeFromList: function() {
-      axios.defaults.baseURL = process.env.VUE_APP_API_URL
-      this.$http('/contents')
+    reloadList:  async function() {
+      await axios.get('/contents')
       .then(response =>  (this.contents = response.data))
     }
   }

@@ -15,7 +15,7 @@
     <button v-if="loggedIn" @click="getIndexAll">全表示</button>
     <div class="flex-container">
       <div class="contents-box" v-for="content in contents" :key="content.id">
-        <AnimeInfo v-for="l in { content } " @clickedRemoveList="removeFromList" :item="l" :key="l.id"></AnimeInfo>
+        <AnimeInfo v-for="l in { content } " @clickedRemoveList="reloadList" :item="l" :key="l.id"></AnimeInfo>
       </div>
     </div>
   </div>
@@ -47,9 +47,7 @@ export default {
   },
   // リストの読み込み
   created: function() {
-      axios.defaults.baseURL = process.env.VUE_APP_API_URL
-      axios.post('/search_index?', { season: this.season, year: this.year })
-      .then(response => (this.contents = response.data))
+      this.reloadList()
   },
   components: {
     AnimeInfo
@@ -61,18 +59,14 @@ export default {
   },
   // 子コンポーネントから削除のイベントを受け取りリストを更新
   methods: {
-    removeFromList: function() {
-      axios.defaults.baseURL = process.env.VUE_APP_API_URL
-      axios.post('/search_index?', { season: this.season, year: this.year })
+    reloadList: async function() {
+      await axios.post('/search_index?', { season: this.season, year: this.year })
       .then(response =>  (this.contents = response.data))
     },
     getIndex: function() {
-      axios.defaults.baseURL = process.env.VUE_APP_API_URL
-      axios.post('/search_index?', { season: this.season, year: this.year })
-      .then(response =>  (this.contents = response.data))
+      this.reloadList()
     },
     getIndexAll: function() {
-      axios.defaults.baseURL = process.env.VUE_APP_API_URL
       axios.post('/search_index?', { season: '', year: '' })
       .then(response =>  (this.contents = response.data))
     }
