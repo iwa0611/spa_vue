@@ -1,6 +1,9 @@
 <template>
   <div>
     <div class="watch-list">今期視聴作品</div>
+    <transition>
+      <spinner v-if="isLoading" size="huge" class="spin"></spinner>
+    </transition>
     <div class="home flex-container">
       <div class="contents-box" v-for="content in contents" :key="content.id">
         <AnimeInfo v-for="l in { content } " @clickedRemoveList="reloadList" :item="l" :key="l.id"></AnimeInfo>
@@ -14,21 +17,26 @@
 <script>
 import AnimeInfo from './AnimeInfo.vue'
 import WatchList from './WatchList.vue'
+import Spinner from 'vue-simple-spinner'
 import axios from 'axios'
 
 export default {
   data() {
     return {
-      contents: null
+      contents: null,
+      isLoading: false
     }
   },
   // リストの読み込み
-  created: function() {
-    this.reloadList()
+  created: async function() {
+    this.isLoading = true
+    await this.reloadList()
+    this.isLoading = false
   },
   components: {
     AnimeInfo,
-    WatchList
+    WatchList,
+    Spinner
   },
   // 子コンポーネントから削除のイベントを受け取りリストを更新
   methods: {
@@ -63,5 +71,14 @@ export default {
   margin-top: 20px;
   border-bottom: 2px solid  #42b983;
   width: 130px;
+}
+.spin {
+  display: block;
+  z-index: 5;
+  margin: 10px auto;
+  max-width: fit-content;
+  opacity: 0.9;
+  background-color: #42b983;
+  border-radius: 20px;
 }
 </style>
