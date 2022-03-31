@@ -14,44 +14,49 @@ export default new Vuex.Store({
     loggedIn: false
   },
   mutations: {
-    // login時の処理
-    login: async function( state, {email, passWord}) {
-      axios.defaults.baseURL = process.env.VUE_APP_API_URL
-      await axios.post('/auth/sign_in', { email: email, password: passWord })
+    setSession(state, res) {
+      state.userData = res
+      state.loggedIn = true
       // ストレージにstateを保存
-      .then(res => {(state.userData = res)
-            state.loggedIn = true
-            sessionStorage.setItem('userData', JSON.stringify(state))
-            })
+      sessionStorage.setItem('userData', JSON.stringify(state))
+    },
+    destroySession(state) {
+      // ストレージ情報削除
+      sessionStorage.removeItem('userData')
+      // ストアの値リセット
+      state.userData = '', state.err = '', state.loggedIn = false
+      router.push('/')
+    },
+    setError(state, e) {
       // エラーメッセージ出力
-      .catch(e => state.err = e.response.data.errors)
+      state.err = e.response.data.errors
+    }
+  },
+  actions: {
+    // login時の処理
+    async login({ commit }, {email, passWord}) {
+      await axios.post('/auth/sign_in', { email: email, password: passWord })
+      .then(res => (commit('setSession', res)))
+      .catch(e => (commit('setError', e)))
     },
     // logout時の処理
-    logout: async function( state, {token, client, expiry, uid, type}) {
-      axios.defaults.baseURL = process.env.VUE_APP_API_URL
+    async logout({ commit }, {token, client, expiry, uid, type}) {
       await axios.delete('/auth/sign_out', { headers: { 'access-token': token,                              
                                                         client: client,
                                                         expiry: expiry,
                                                         uid: uid,
                                                         'token-type': type
                                                       }})
-      .then(() => {
-            // ストレージ情報削除
-            sessionStorage.removeItem('userData')
-            // ストアの値リセット
-            state.userData = '', state.err = '', state.loggedIn = false
-            router.push('/')})
-      .catch(e => state.err = e.response.data.errors)
+     .then(() =>(commit('destroySession')))
+     .catch(e => (commit('setError', e)))
     }
-  },
-  actions: {
   },
   modules: {
     review: review
   },
   plugins: [createPersistedState(
     { key: 'userData',
-      storage: window.sessionStorage
-    } // 保存先をsessionに変更
+      storage: window.sessionStorage // 保存先をsessionに変更
+    } 
   )] 
 })

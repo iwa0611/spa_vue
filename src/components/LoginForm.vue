@@ -33,15 +33,15 @@ export default {
   },
   methods: {
     login() {
-      // mutationのログインにフォームの情報を渡す
-      this.$store.commit('login', { email: this.email, passWord: this.passWord})
+      // actionのログインにフォーム情報を渡す
+      this.$store.dispatch('login', { email: this.email, passWord: this.passWord})
       // パスワードフォームのクリア
       this.passWord = ''
     },
     logout() {
-      // mutationのログアウトにヘッダーを含めて渡す
+      // actionのログアウトにヘッダーを含めて渡す
       let headers = this.$store.state.userData.headers
-      this.$store.commit('logout', { token: headers['access-token'],
+      this.$store.dispatch('logout', { token: headers['access-token'],
                                      client: headers.client,
                                      expiry: headers.expiry,
                                      uid: headers.uid,
