@@ -3,7 +3,7 @@
     <!-- 過去作表示用セレクタ -->
     <select  v-model="year">
       <option v-for="i in 10" :key="i">
-        {{ 2022 - i }}
+        {{ 2023 - i }}
       </option>
     </select>
     <select  v-model="season">
@@ -31,8 +31,8 @@ export default {
       contents: null,
       searchWord: null,
       list: '',
-      year: 2021,
-      season: '-autumn',
+      year: 2022,
+      season: '-winter',
       isLoading: false,
       currentPage: 1, // 現在のページ
       perPage: 20, // １ページ辺りの表示数
