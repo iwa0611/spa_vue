@@ -6,7 +6,6 @@ Vue.use(Vuex)
 
 export default {
   state: {
-    rate: ''
   },
   mutations: {
     // 取得したreview情報を代入
@@ -30,6 +29,9 @@ export default {
     },
     setComment (state, rate) {
       state.rate.comment = rate
+    },
+    setFavorite (state, favo) {
+      state.rate.favorite = favo
     },
   },
   actions: {
