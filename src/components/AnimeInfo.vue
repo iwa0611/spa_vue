@@ -5,8 +5,8 @@
     <Message ref="child"></Message>
     <AnimeReview @close="closeModal" :item="item" v-if="modal"></AnimeReview>
     <div class="list">
-      <!-- home画面の時はモーダルが開ける -->
-      <p v-if="this.$route.path === '/'" class="modal-title" @click="openModal">
+      <!-- search画面の時意外はモーダルが開ける -->
+      <p v-if="this.$route.path !== '/search'" class="modal-title" @click="openModal">
         {{ item.title }}
       </p>
       <p v-else>
