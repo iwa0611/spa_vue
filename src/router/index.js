@@ -13,6 +13,11 @@ const routes = [
     component: Home, Watch
   },
   {
+    path: '/favorite',
+    name: 'Favorite',
+    component: () => import('../components/FavoriteList.vue') 
+  },
+  {
     path: '/search',
     name: 'Search',
     component: () => import('../components/AnimeSearch.vue'),

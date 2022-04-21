@@ -7,6 +7,7 @@
         <hr />
         <div id="nav">
           <router-link to="/">Home</router-link>
+          | <router-link to="/favorite">Favorite</router-link>
           <div class="user-menu" v-if="$store.state.loggedIn">
             | <router-link to="/search">Search</router-link>
             | <router-link to="/login">LogOut</router-link>
