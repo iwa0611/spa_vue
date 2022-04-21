@@ -43,6 +43,11 @@
             </div>
             <textarea v-model="comment" cols="60" rows="4" placeholder="コメント(120文字以内)" maxlength="120"></textarea>
             <footer>
+              <!-- home画面でのみレビューにお気に入りボタン表示 -->
+              <path-check v-if="this.$route.path === '/'">
+                <button v-if="this.favorite" class="favo-button" @click="add_or_remove_Favo">★</button>
+                <button v-else class="favo-button" @click="add_or_remove_Favo">☆</button>
+              </path-check>
               <button v-if="loggedIn" @click="editReview">編集</button>
               <button @click="$emit('close')">閉じる</button>
             </footer>
@@ -118,6 +123,14 @@ export default {
       set (value) {
         this.$store.commit('setComment', value)
       }
+    },
+    favorite: {
+      get () {
+        return this.$store.state.review.rate.favorite
+      },
+      set (value) {
+        this.$store.commit('setFavorite', value)
+      }
     }
   },
   methods: {
@@ -131,6 +144,20 @@ export default {
                                                       sakuga: this.sakuga })
       .then(() => this.$refs.child.toastMessage('編集しました'))
       .catch(() => this.$refs.child.toastMessage('失敗しました'))
+    },
+    add_or_remove_Favo: function() {
+      // お気に入り追加か削除の判定
+      if(this.favorite){
+        axios.put('/contents/' + this.item.id, { favorite: false })
+        .then(() => this.$refs.child.toastMessage('お気に入りから削除しました'),
+                    this.favorite = false)
+        .catch(() => this.$refs.child.toastMessage('お気に入りから削除にしました'))
+      }else{
+        axios.put('/contents/' + this.item.id, { favorite: true })
+        .then(() => this.$refs.child.toastMessage('お気に入りに追加しました'),
+                    this.favorite = true)
+        .catch(() => this.$refs.child.toastMessage('お気に入り追加に失敗しました'))
+      }
     }
   }
 }
@@ -231,6 +258,9 @@ button {
   background-color: rgb(65, 65, 219);
   border: 1px solid rgb(192, 198, 252);
   border-radius: 5px;
+}
+.favo-button {
+  color: orange;
 }
 /* オーバーレイのトランジション */
 .modal-enter-active, .modal-leave-active {
