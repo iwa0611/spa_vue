@@ -44,7 +44,7 @@
             <textarea v-model="comment" cols="60" rows="4" placeholder="コメント(120文字以内)" maxlength="120"></textarea>
             <footer>
               <!-- home画面でのみレビューにお気に入りボタン表示 -->
-              <path-check v-if="this.$route.path === '/'">
+              <path-check v-if="this.$route.path === '/' && LoggedIn">
                 <button v-if="this.favorite" class="favo-button" @click="add_or_remove_Favo">★</button>
                 <button v-else class="favo-button" @click="add_or_remove_Favo">☆</button>
               </path-check>
