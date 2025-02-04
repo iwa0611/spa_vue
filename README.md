@@ -6,7 +6,8 @@
 
 ## **🌍App URL**
 
-[APP URL](https://murmuring-sea-35771.herokuapp.com/)
+~~[APP URL](https://murmuring-sea-35771.herokuapp.com/)~~
+heroku終了の為、現在は表示できません。
 
 [API側のGit](https://github.com/iwa0611/spa_api)
 > #### herokuにデプロイした物が開かれます。<br>うまく表示されない場合はリロードしてください。
